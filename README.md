@@ -103,6 +103,7 @@ relabelled as streaming is not sufficient.
 
 - [Documentation index](docs/README.md)
 - [Model and benchmark matrix](docs/model-family-matrix.md)
+- [Training and fine-tune notes](docs/training-and-finetune-notes.md)
 - [Runtime boundary ADR](docs/architecture/adr-runtime-boundaries.md)
 - [Native/runtime evaluation](docs/native-runtime-evaluation.md)
 - [Text preparation profiles](docs/text-preparation-profiles.md)
