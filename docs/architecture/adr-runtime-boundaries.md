@@ -71,12 +71,20 @@ The adapter owns tokenizer invocation, model loading, generation parameters,
 voice-state construction, and runtime-specific streaming. It reports
 capabilities instead of pretending that every backend supports every request.
 
-## Model-bundle identity
+## Identity and receipt boundaries
 
-The adapter must reject a voice state, tokenizer, or configuration whose identity
-does not match the loaded bundle. The bundle identity is part of the worker-ready
-receipt and of every synthesis result. A cache hit is valid only when all
-identity fields match.
+The bridge does not treat every reproducibility field as one model identifier.
+Use [Model-bundle identity and synthesis receipts](../model-bundle-identity.md):
+
+- ModelBundleIdentity is the immutable checkpoint and tokenizer artifact;
+- ExecutionProfile is the runtime, export, precision, device, and thread setup;
+- VoiceConditionIdentity is the preset/reference conditioning identity;
+- TextPreparationIdentity is the tokenizer-facing text profile;
+- SynthesisReceipt references all of them and records the actual request/output.
+
+Loaded-model caches, voice-state caches, prepared-text caches, and final-audio
+caches must use the smallest complete key for the object they hold. Unknown or
+partially verified identity fields fail closed.
 
 ## Audio event semantics
 
