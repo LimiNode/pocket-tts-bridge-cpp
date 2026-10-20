@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- corrective: aligned the roadmap with a Python-first usable bridge;
+- corrective: separated model, execution, voice, text, and synthesis identities;
+- corrective: recorded benchmark provenance and voice-reference authorization;
+
 - added the initial architecture and evidence documentation layer;
 - documented PocketTTS family checkpoints as complete model bundles rather than
   standalone weight files;
