@@ -1,6 +1,6 @@
 # Model provenance and licensing
 
-Last reviewed: 2026-10-18
+Last reviewed: 2026-10-20
 
 The bridge code, runtime dependencies, model weights, fine-tune data, and
 voice assets are separate legal and provenance objects. A permissive code
