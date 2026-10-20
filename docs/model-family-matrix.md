@@ -1,6 +1,6 @@
 # PocketTTS model family matrix
 
-Last reviewed: 2026-10-18
+Last reviewed: 2026-10-20
 
 This is an investigation registry, not a release compatibility list. A row
 moves to supported only after the exact model revision, tokenizer, configuration,
@@ -28,8 +28,6 @@ been independently reproduced by this repository.
 
 | Model | CER down | UTMOS up | Speaker Sim up | EnCodec FAD down | xRT GPU 1080 down |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Qwen3-TTS 0.6B | 1.10 | 3.733 | 0.822 | 1.02 | 0.91 |
-| Qwen3-TTS 1.7B | 0.90 | 3.756 | 0.826 | 1.28 | 2.25 |
 | xVibePocketTTS | 2.00 | 3.404 | 0.733 | 5.81 | 0.17 |
 | PocketTTS Shtorm 1.75 | 3.86 | 3.511 | 0.721 | 9.85 | 0.17 |
 | PocketTTS Shtorm 2.7 slow | 2.60 | 3.494 | 0.732 | 6.91 | 0.17 |
@@ -48,8 +46,7 @@ The table is useful for experiment prioritization:
 
 The meaning of xRT must also be confirmed by the source. If it is generation
 time divided by audio duration, 0.17 would correspond to approximately 5.9x
-real time and 0.91 to approximately 1.1x real time. That conversion is an
-interpretation, not a local measurement.
+real time. That conversion is an interpretation, not a local measurement.
 
 ## Published speed figures to reproduce
 
