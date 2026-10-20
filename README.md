@@ -40,9 +40,13 @@ checkpoint. A Pocket TTS model is loadable only when its complete model bundle
 is identified and validated:
 
 ~~~text
-weights + tokenizer + architecture/config + generation settings
+weights + tokenizer + architecture/config + model-specific defaults
        + voice-conditioning assets + provenance/license metadata
 ~~~
+
+Runtime, device, precision, conversion, and request generation parameters are
+recorded separately in the execution and synthesis identities described in
+[docs/model-bundle-identity.md](docs/model-bundle-identity.md).
 
 A voice state produced for one bundle must never be silently reused with another
 bundle.
