@@ -15,52 +15,55 @@ inference is valuable only after the reference behavior is observable.
 Exit: a new model can be described without inventing support or mixing its
 tokenizer, configuration, voice state, and license with another model.
 
-## Phase 1 — reference harness
+## M0 — bridge core contract
 
-- implement a mock worker and protocol framing;
-- add a persistent-worker lifecycle and request-state model;
-- run the original Python runtime on a fixed short corpus;
+- define model-bundle, execution, voice-condition, text-preparation, and
+  synthesis-receipt identities;
+- implement protocol framing and a mock worker;
+- implement the persistent local transport and asynchronous client lifecycle;
+- cover request IDs, queueing, cancellation, backpressure, and terminal events.
+
+Exit: a mock worker can exercise the complete client contract without any model
+weights or native inference dependency.
+
+## M1 — Python reference backend
+
+- integrate the original Python PocketTTS runtime behind the backend interface;
+- load one named checkpoint and record its complete bundle identity;
+- run a fixed Russian/English corpus with a declared text-preparation profile;
 - save PCM/WAV artifacts and environment receipts.
 
-Exit: repeated requests, cancellation, terminal events, and PCM metadata are
-deterministic enough to compare backends.
+Exit: the first usable bridge is Python-backed, persistent, asynchronous, and
+reproducible. Native acceptance is not required for this exit.
 
-## Phase 2 — model matrix
+## M2 — model and native compatibility research
 
-- load Kyutai, xVibe, Shtorm fast/slow, and the research checkpoint where
-  access and terms permit;
-- record tokenizer/config/voice bundle identities;
-- test text-preparation profiles and long-form behavior;
-- mark each model inventory, reproduced, compatible, blocked, or not evaluated.
-
-Exit: exact checkpoint compatibility is known for each selected runtime.
-
-## Phase 3 — native feasibility
-
-- test PocketTTS.cpp against the exact selected bundles;
+- extend the model matrix to xVibe, Shtorm fast/slow, and permitted research
+  checkpoints;
+- test PocketTTS.cpp against exact selected bundles;
 - test sherpa-onnx only for matching exports and tokenizer paths;
 - compare FP32 and INT8 where the runtime supports both;
 - preserve failed exports and lazy-loading errors as receipts.
 
-Exit: at least one native path passes PCM correctness, lifecycle behavior, and
-the selected quality threshold for a named bundle.
+Native feasibility may proceed in parallel with M1. Its result determines which
+optional profiles can be promoted; it does not block the Python-backed bridge.
 
-## Phase 4 — bridge implementation
+## M3 — optional native release profiles
 
-- implement the public async C++17 client;
-- add request IDs, cancellation, bounded queues, worker supervision, and
-  structured diagnostics;
-- keep backend capability negotiation explicit;
-- add a WAV example and a no-model mock path.
+- promote a native backend only after PCM, lifecycle, and quality gates pass for
+  a named bundle;
+- advertise backend capabilities and unsupported profiles explicitly;
+- keep native and Python receipts comparable without conflating their execution
+  identities.
 
-Exit: an application can submit multiple requests to one worker and receive
-ordered PCM plus exactly one terminal result per request.
+Exit: at least one native profile is accepted as an optional backend. The
+Python-backed profile remains an independent release path.
 
-## Phase 5 — packaging and release
+## M4 — packaging and release
 
 - package the accepted worker without committing model weights;
 - provide explicit model-location and offline modes;
-- reproduce the acceptance receipt on a clean target machine;
+- reproduce the selected receipt on a clean target machine;
 - publish attribution and model-license information next to the release.
 
 Exit: the release artifact, model bundle, runtime, and license obligations are
@@ -70,16 +73,20 @@ independently identifiable.
 
 The first usable version is complete when:
 
-- one named PocketTTS bundle loads through a documented backend;
+- M0 and M1 pass for one named PocketTTS bundle;
 - the worker remains alive between requests;
 - asynchronous submission returns promptly;
 - PCM chunks arrive before terminal completion;
 - sample metadata and sequence numbers are valid;
 - active and queued cancellation have defined behavior;
 - repeated requests do not cross-contaminate voice state;
-- model, tokenizer, configuration, voice assets, runtime, and license are recorded;
+- model, tokenizer, configuration, voice assets, runtime, and license are
+  recorded;
 - a reproducible receipt and audio artifact are available;
 - setup and offline operation are documented.
+
+Native acceptance belongs to M3 and is not a prerequisite for the first usable
+Python-backed bridge.
 
 ## Open questions
 
