@@ -1,6 +1,6 @@
 # Roadmap and acceptance gates
 
-Last reviewed: 2026-10-18
+Last reviewed: 2026-10-20
 
 The roadmap deliberately starts with evidence and lifecycle contracts. Native
 inference is valuable only after the reference behavior is observable.
