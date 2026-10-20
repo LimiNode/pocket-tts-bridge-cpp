@@ -16,7 +16,10 @@ network. Keep a reference runtime available while native backends are evaluated.
 ## Invariants
 
 - Treat a checkpoint as a complete bundle: weights, tokenizer, architecture
-  configuration, generation settings, voice-conditioning assets, and provenance.
+  configuration, model-specific defaults, voice-conditioning assets, and
+  provenance.
+- Keep execution details such as runtime, device, precision, and conversion
+  outside the immutable model identity; record them in an ExecutionProfile.
 - Never reuse a voice state across different bundle identities without an
   explicit compatibility proof.
 - Keep transport, worker supervision, protocol, request state, and backend
@@ -43,8 +46,8 @@ Documentation and code comments must identify whether a statement is:
 - an unverified hypothesis or an open compatibility gate.
 
 Performance claims require hardware, software, model identity, precision, batch
-size, text set, warm-up policy, and measurement method. Quality claims require a
-fixed test set and a reproducible receipt.
+size, text set, warm-up policy, and measurement method. Quality claims require
+a fixed test set and a reproducible receipt.
 
 ## Implementation order
 
