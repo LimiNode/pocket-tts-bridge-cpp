@@ -49,6 +49,31 @@ should not silently download a checkpoint. Downloads, when implemented, must
 require an explicit source, revision, and digest, with an offline/no-download
 mode.
 
+## Voice reference authorization and privacy
+
+Reference audio and derived voice states are separate user data. Permission to
+use model weights does not authorize cloning an arbitrary person's voice.
+
+The bridge must require an explicit lawful authorization policy for a reference
+voice and must not infer consent from public availability, a file path, or the
+license of the model. The policy should be attached to the
+VoiceConditionIdentity as a reference, not stored as raw consent material in
+ordinary synthesis caches.
+
+Default handling:
+
+- do not persist raw reference audio;
+- do not persist derived voice states beyond the worker session unless the user
+  explicitly opts in;
+- do not write raw audio or voice embeddings to routine logs;
+- use a digest and policy revision in receipts where reproducibility requires a
+  reference;
+- never reuse a voice state across users, model bundles, or conditioning
+  algorithms without an explicit compatibility and authorization check.
+
+If a runtime or model card imposes stricter requirements, the stricter rule
+wins. An authorization failure is a fail-closed request error.
+
 ## Related but separate families
 
 Supertonic and VITS-based Russian systems may be useful future backends, but
