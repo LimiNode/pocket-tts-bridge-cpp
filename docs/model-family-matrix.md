@@ -65,20 +65,38 @@ The reported run is FP32, batch 1, warmed up, and uses one text of about
 conditions before comparing them with this bridge. A Xeon or another CPU must
 receive its own receipt.
 
+## Benchmark provenance
+
+The benchmark table above is an **unpublished external benchmark snapshot**:
+
+| Field | Value |
+| --- | --- |
+| source type | external screenshot/transcription supplied for project research |
+| source date | 2026-10-16 |
+| public source reference | none available |
+| primary methodology | unknown |
+| dataset manifest | unavailable; only the reported size of 1270 files is known |
+| transcription method | manual transcription from the supplied image |
+| reproduction status | not reproduced by this repository |
+| claim status | external observation only; not a project benchmark |
+
+No URL, dataset identity, hardware configuration, or metric implementation is
+inferred beyond what is visible in the supplied material. The table should be
+replaced or supplemented with a public source and a reproducible manifest if
+those become available.
+
 ## Complete model-bundle identity
 
-Every experiment and cache entry must identify at least:
+The earlier list mixed immutable model identity with runtime and request
+configuration. Use the separate definitions in
+[Model-bundle identity and synthesis receipts](model-bundle-identity.md):
 
-- model repository and exact revision or digest;
-- weight files and SHA-256;
-- architecture/configuration revision;
-- tokenizer type, files, vocabulary, and SHA-256;
-- generation parameters and random-seed policy;
-- voice profile, reference-audio digest, or other conditioning asset;
-- runtime name and exact version/commit;
-- precision, device, batch size, and thread settings;
-- text-preparation profile;
-- license/provenance record.
+- ModelBundleIdentity for weights, tokenizer, architecture, and immutable model
+  configuration;
+- ExecutionProfile for runtime, export, precision, device, and thread settings;
+- VoiceConditionIdentity for preset/reference conditioning and its algorithm;
+- TextPreparationIdentity for tokenizer-facing text normalization;
+- SynthesisReceipt for the complete operation and produced audio.
 
 A file named model.safetensors is not a sufficient identity. Loading weights
 without the matching tokenizer or configuration is a failed compatibility
