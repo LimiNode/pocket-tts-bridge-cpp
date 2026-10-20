@@ -48,14 +48,19 @@ fixed test set and a reproducible receipt.
 
 ## Implementation order
 
-1. define model-bundle identity and protocol data types;
-2. add a mock worker and lifecycle tests;
-3. implement the persistent local transport and asynchronous client;
-4. integrate the reference runtime;
-5. add native/runtime adapters behind the same contract;
-6. measure first audio, real-time factor, memory, cancellation, and PCM
-   correctness;
-7. package only after a reproducible runtime path passes acceptance.
+1. define model-bundle, execution, voice-condition, text-preparation, and
+   synthesis-receipt identities;
+2. implement protocol framing, a mock worker, and the persistent local
+   transport;
+3. implement the asynchronous C++ client, request state, cancellation, and
+   terminal-event rules;
+4. integrate the Python reference backend and one named checkpoint;
+5. evaluate native/runtime adapters as an independent compatibility track;
+6. package the first accepted Python-backed profile, then optional native
+   profiles after their own gates.
+
+The first usable bridge may be Python-backed. Successful native or ONNX
+acceptance is not a prerequisite for that milestone.
 
 ## Documentation routing
 
